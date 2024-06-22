@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from './components/HomeScreen';
-import MyCardsScreen from './components/MyCardsScreen';
-import StatisticsScreen from './components/StatisticsScreen';
-import SettingsScreen from './components/SettingsScreen';
+import HomeScreen from './components/HomeScreen.js';
+import MyCardsScreen from './components/MyCardsScreen.js';
+import StatisticsScreen from './components/StatisticsScreen.js';
+import SettingsScreen from './components/SettingsScreen.js';
 
 const Tab = createBottomTabNavigator();
 
