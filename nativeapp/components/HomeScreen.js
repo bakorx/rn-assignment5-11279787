@@ -6,7 +6,7 @@ import { useTheme } from '../theme-context';
 const transactions = [
   { id: '1', icon: require('../assets/apple.png'), title: 'Apple Store', category: 'Entertainment', amount: '- $5,99' },
   { id: '2', icon: require('../assets/spotify.png'), title: 'Spotify', category: 'Music', amount: '- $12,99' },
-  { id: '3', icon: require('../assets/money-transfer.png'), title: 'Money Transfer', category: 'Transaction', amount: '$300' },
+  { id: '3', icon: require('../assets/moneyTransfer.png'), title: 'Money Transfer', category: 'Transaction', amount: '$300' },
   { id: '4', icon: require('../assets/grocery.png'), title: 'Grocery', category: '', amount: '- $88' },
 ];
 
@@ -17,10 +17,12 @@ const HomeScreen = () => {
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={styles.header}>
-        <Image source={require('../assets/profile.jpg')} style={styles.profileImage} />
-        <View style={styles.headerText}>
-          <Text style={[styles.greeting, isDarkMode && styles.darkText]}>Welcome back,</Text>
-          <Text style={[styles.name, isDarkMode && styles.darkText]}>Eric Atsu</Text>
+        <View style={styles.headerLeft}>
+          <Image source={require('../assets/profilepic.jpeg')} style={styles.profileImage} />
+          <View style={styles.headerText}>
+            <Text style={[styles.greeting, isDarkMode && styles.darkText]}>Welcome back</Text>
+            <Text style={[styles.name, isDarkMode && styles.darkText]}>Kwame Bakor</Text>
+          </View>
         </View>
         <TouchableOpacity>
           <Icon name="search" size={30} color={isDarkMode ? '#fff' : '#000'} />
@@ -28,7 +30,7 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.cardContainer}>
-        <Image source={require('../assets/card-bg.png')} style={styles.cardImage} />
+        <Image source={require('../assets/Card.png')} style={styles.cardImage} />
       </View>
 
       <View style={styles.actions}>
@@ -86,8 +88,13 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   profileImage: {
     width: 50,
