@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../theme-context';
 
 const transactions = [
-  { id: '1', icon: 'apple', title: 'Apple Store', category: 'Entertainment', amount: '- $5,99' },
-  { id: '2', icon: 'spotify', title: 'Spotify', category: 'Music', amount: '- $12,99' },
-  { id: '3', icon: 'swap-vert', title: 'Money Transfer', category: 'Transaction', amount: '$300' },
-  { id: '4', icon: 'cart', title: 'Grocery', category: '', amount: '- $88' },
+  { id: '1', icon: require('../assets/apple.png'), title: 'Apple Store', category: 'Entertainment', amount: '- $5,99' },
+  { id: '2', icon: require('../assets/spotify.png'), title: 'Spotify', category: 'Music', amount: '- $12,99' },
+  { id: '3', icon: require('../assets/money-transfer.png'), title: 'Money Transfer', category: 'Transaction', amount: '$300' },
+  { id: '4', icon: require('../assets/grocery.png'), title: 'Grocery', category: '', amount: '- $88' },
 ];
 
 const HomeScreen = () => {
@@ -18,17 +17,18 @@ const HomeScreen = () => {
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={styles.header}>
-        <Text style={[styles.greeting, isDarkMode && styles.darkText]}>Welcome back,</Text>
-        <Text style={[styles.name, isDarkMode && styles.darkText]}>Kwame Bakor</Text>
-        <Image source={require('../assets/profilepic.jpeg')} style={styles.profileImage} />
+        <Image source={require('../assets/profile.jpg')} style={styles.profileImage} />
+        <View style={styles.headerText}>
+          <Text style={[styles.greeting, isDarkMode && styles.darkText]}>Welcome back,</Text>
+          <Text style={[styles.name, isDarkMode && styles.darkText]}>Eric Atsu</Text>
+        </View>
+        <TouchableOpacity>
+          <Icon name="search" size={30} color={isDarkMode ? '#fff' : '#000'} />
+        </TouchableOpacity>
       </View>
 
-      <View style={[styles.card, isDarkMode && styles.darkCard]}>
-        <Text style={[styles.cardNumber, isDarkMode && styles.darkText]}>4562 1122 4595 7852</Text>
-        <Text style={[styles.cardHolder, isDarkMode && styles.darkText]}>AR Jonson</Text>
-        <Text style={[styles.cardDetails, isDarkMode && styles.darkText]}>Expiry Date: 24/2000</Text>
-        <Text style={[styles.cardDetails, isDarkMode && styles.darkText]}>CVV: 6986</Text>
-        <MaterialIcon name="credit-card" size={30} color="#fff" />
+      <View style={styles.cardContainer}>
+        <Image source={require('../assets/card-bg.png')} style={styles.cardImage} />
       </View>
 
       <View style={styles.actions}>
@@ -62,7 +62,7 @@ const HomeScreen = () => {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={[styles.transactionItem, isDarkMode && styles.darkTransactionItem]}>
-            <MaterialIcon name={item.icon} size={30} color={isDarkMode ? '#fff' : '#000'} />
+            <Image source={item.icon} style={styles.transactionIcon} />
             <View style={styles.transactionDetails}>
               <Text style={[styles.transactionTitle, isDarkMode && styles.darkText]}>{item.title}</Text>
               <Text style={[styles.transactionCategory, isDarkMode && styles.darkText]}>{item.category}</Text>
@@ -86,9 +86,16 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  headerText: {
+    marginLeft: 10,
   },
   greeting: {
     fontSize: 18,
@@ -100,31 +107,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
   },
-  profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  card: {
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: '#1e1e1e',
+  cardContainer: {
     marginBottom: 20,
+    alignItems: 'center',
   },
-  darkCard: {
-    backgroundColor: '#333',
-  },
-  cardNumber: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  cardHolder: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  cardDetails: {
-    fontSize: 14,
-    marginBottom: 5,
+  cardImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
   },
   actions: {
     flexDirection: 'row',
@@ -160,6 +150,10 @@ const styles = StyleSheet.create({
   },
   darkTransactionItem: {
     borderBottomColor: '#555',
+  },
+  transactionIcon: {
+    width: 30,
+    height: 30,
   },
   transactionDetails: {
     flex: 1,

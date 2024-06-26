@@ -1,13 +1,12 @@
-import * as React from 'react';
+import React from 'react';
+import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { ThemeProvider } from './theme-context'; // Ensure correct import
-
 import HomeScreen from './components/HomeScreen';
+import SettingsScreen from './components/SettingsScreen';
 import MyCardsScreen from './components/MyCardsScreen';
 import StatisticsScreen from './components/StatisticsScreen';
-import SettingsScreen from './components/SettingsScreen';
+import { ThemeProvider } from './theme-context';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,25 +16,38 @@ const App = () => {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
-            tabBarIcon: ({ color, size }) => {
+            tabBarIcon: ({ focused }) => {
               let iconName;
-
-              if (route.name === 'Home') {
-                iconName = 'home';
-              } else if (route.name === 'My Cards') {
-                iconName = 'card';
-              } else if (route.name === 'Statistics') {
-                iconName = 'stats-chart';
-              } else if (route.name === 'Settings') {
-                iconName = 'settings';
+              switch (route.name) {
+                case 'Home':
+                  iconName = focused
+                    ? require('./assets/home.png')
+                    : require('./assets/home.png');
+                  break;
+                case 'My Cards':
+                  iconName = focused
+                    ? require('./assets/myCards.png')
+                    : require('./assets/myCards.png');
+                  break;
+                case 'Statistics':
+                  iconName = focused
+                    ? require('./assets/statistics.png')
+                    : require('./assets/statistics.png');
+                  break;
+                case 'Settings':
+                  iconName = focused
+                    ? require('./assets/settings.png')
+                    : require('./assets/settings.png');
+                  break;
               }
 
-              return <Icon name={iconName} size={size} color={color} />;
+              return <Image source={iconName} style={{ width: 20, height: 20 }} />;
             },
           })}
           tabBarOptions={{
-            activeTintColor: 'blue',
+            activeTintColor: 'tomato',
             inactiveTintColor: 'gray',
+            showLabel: false,
           }}
         >
           <Tab.Screen name="Home" component={HomeScreen} />

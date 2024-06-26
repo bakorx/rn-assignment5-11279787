@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Switch, TouchableOpacity, StatusBar } from 'react-native';
 import { useTheme } from '../theme-context';
 
 const SettingsScreen = () => {
@@ -7,6 +7,7 @@ const SettingsScreen = () => {
 
   return (
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Text style={[styles.title, isDarkMode && styles.darkTitle]}>Settings</Text>
       <TouchableOpacity style={styles.item}>
         <Text style={[styles.itemText, isDarkMode && styles.darkItemText]}>Language</Text>
